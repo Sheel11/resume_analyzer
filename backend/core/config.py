@@ -13,7 +13,6 @@ APP_VERSION = '1.0.0'
 APP_DESCRIPTION = 'analyse resumes against job description using nlp + ml'
 
 ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGIN')
-print(ALLOWED_ORIGINS)
 
 # file
 MAX_FILE_SIZE_MB = 5
