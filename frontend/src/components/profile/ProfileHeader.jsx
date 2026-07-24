@@ -1,7 +1,6 @@
 import { Mail, CheckCircle, TrendingUp, Trophy } from 'lucide-react'
 
 function ProfileHeader({ user, stats }) {
-    // Extract user details from the Clerk User object
     const { imageUrl, fullName, email } = user
 
     return (
