@@ -6,7 +6,7 @@ An AI-powered resume analysis platform that evaluates resumes against job descri
 
 # Features
 
-- Upload resumes in PDF format
+- Upload resumes in PDF or DOCX format
 - Analyze resumes against custom Job Descriptions
 - Generate ATS compatibility scores
 - Structured resume parsing using Groq LLM
