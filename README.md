@@ -43,7 +43,7 @@ An AI-powered resume analysis platform that evaluates resumes against job descri
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```text
 ATS-Resume-Scorer
@@ -72,7 +72,7 @@ ATS-Resume-Scorer
 
 ---
 
-# ⚙️ Installation
+# Installation
 
 ## Clone Repository
 
