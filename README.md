@@ -1,6 +1,6 @@
-# AI-Powered ATS Resume Scorer
+# AI-Powered Resume Analyzer
 
-An AI-powered resume analysis platform that evaluates resumes against job descriptions using semantic similarity and structured resume parsing. The application generates ATS compatibility scores, identifies skill gaps, provides personalized feedback based on ATS component scores, generates downloadable reports, and manage users analysis history.
+An AI-powered resume analysis application that evaluates resumes against job descriptions using semantic similarity and structured resume parsing. The application generates ATS compatibility scores, identifies skill gaps, provides personalized feedback based on ATS component scores, generates downloadable reports, and manage users analysis history.
 
 ---
 
