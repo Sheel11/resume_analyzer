@@ -3,13 +3,9 @@ import { useDropzone } from 'react-dropzone'
 import { UploadCloud, FileText, CheckCircle2, FileUp, ClipboardType, Loader2, X } from 'lucide-react'
 
  function Analyze({ onFileSelect, jobDescription, onJobDescriptionChange }) {
-  const [selectedFileName, setSelectedFileName] = useState(null)
-  const [jdTab, setJdTab] = useState('paste') // 'paste' | 'upload'
-  const [jdFileName, setJdFileName] = useState(null)
-  const [jdParsing, setJdParsing] = useState(false)
-  const [jdParseError, setJdParseError] = useState(null)
+   const [selectedFileName, setSelectedFileName] = useState(null)
 
-  const onDrop = useCallback(
+   const onDrop = useCallback( 
     (acceptedFiles) => {
       if (acceptedFiles.length === 0) return
       const file = acceptedFiles[0]
@@ -28,46 +24,7 @@ import { UploadCloud, FileText, CheckCircle2, FileUp, ClipboardType, Loader2, X 
     maxFiles: 1,
   })
 
-  const onJdDrop = useCallback(
-    async (acceptedFiles) => {
-      if (acceptedFiles.length === 0) return
-      const file = acceptedFiles[0]
-      setJdFileName(file.name)
-      setJdParseError(null)
-      setJdParsing(true)
-      try {
-        const text = await extractTextFromFile(file)
-        onJobDescriptionChange(text)
-       // switch to paste tab to show extracted text
-      } catch (err) {
-        setJdParseError('Could not parse the file. Please paste the text manually.')
-      } finally {
-        setJdParsing(false)
-      }
-    },
-    [onJobDescriptionChange]
-  )
-
-  const {
-    getRootProps: getJdRootProps,
-    getInputProps: getJdInputProps,
-    isDragActive: isJdDragActive,
-  } = useDropzone({
-    onDrop: onJdDrop,
-    accept: {
-      'application/pdf': ['.pdf'],
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
-    },
-    maxFiles: 1,
-    disabled: jdParsing,
-  })
-
-  const clearJdFile = () => {
-    setJdFileName(null)
-    setJdParseError(null)
-    onJobDescriptionChange('')
-  }
-
+  
   return (
     <div className="bg-white rounded-xl border border-slate-100 shadow-sm shadow-slate-200/40 p-8 md:p-10 space-y-10">
 
