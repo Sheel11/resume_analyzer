@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { UploadCloud, FileText, CheckCircle2, FileUp, ClipboardType, Loader2, X } from 'lucide-react'
+import { UploadCloud, FileText, CheckCircle2, FileUp, ClipboardType } from 'lucide-react'
 
  function Analyze({ onFileSelect, jobDescription, onJobDescriptionChange }) {
    const [selectedFileName, setSelectedFileName] = useState(null)
