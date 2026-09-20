@@ -35,7 +35,7 @@ def analyze_issues(
         'tech stack',
     ])
 
-    if not proj_entries and len(projects) == 0 and not has_projects_signal:
+    if not proj_entries and not has_projects_signal:
         detected.append(
             IssueDetail(
 
@@ -52,7 +52,7 @@ def analyze_issues(
              
 
             how_to_fix=(
-                "Add a 'Projects' section with 2–3 significant projects. "
+                "Add a 'Projects' section with 2-3 significant projects. "
                 "For each project, include the title, technologies used, "
                 "what you built, and a measurable outcome."
             ),
@@ -60,7 +60,7 @@ def analyze_issues(
 
             action_items=[
                 "Add a 'PROJECTS' section heading after your Experience section",
-                "Include 2–3 projects (personal, academic, or open-source)",
+                "Include 2-3 projects (personal, academic, or open-source)",
                 "For each project: write the title, tech stack used, what you built, and a measurable result",
                 "Example: 'E-Commerce Platform — React, Node.js, MongoDB. Handled 500+ transactions/month'",
                 "Link to GitHub or a live demo if available (e.g., github.com/yourname/project)",
@@ -107,17 +107,17 @@ def analyze_issues(
                 ),
                 action_items=[
                     "Add an 'EXPERIENCE' or 'INTERNSHIPS' section to your resume",
-                    "List each role with: Job Title — Company Name (Month Year – Month Year)",
-                    "Add 2–4 bullet points per role describing what you did and its impact",
+                    "List each role with: Job Title — Company Name (Month Year - Month Year)",
+                    "Add 2-4 bullet points per role describing what you did and its impact",
                     "If no formal job: include internships, freelance work, open-source, or college clubs",
                     "Start every bullet with a past-tense action verb (Developed, Built, Led, etc.)",
                 ],
                 example_improvement=(
                     "Add:\n"
                     "EXPERIENCE\n"
-                    "Software Engineering Intern — XYZ Corp (Jun 2025 – Aug 2025)\n"
-                    "• Developed REST APIs with FastAPI serving 10K requests/day\n"
-                    "• Reduced page load time by 40% through caching optimization"
+                    "Software Engineering Intern — XYZ Corp (Jun 2025 - Aug 2025)\n"
+                    "Developed REST APIs with FastAPI serving 10K requests/day\n"
+                    "Reduced page load time by 40% through caching optimization"
                 ),
             ))
             
@@ -128,7 +128,7 @@ def analyze_issues(
         'b.tech', 'btech', 'b.e.', 'b.sc', 'bsc', 'm.tech', 'mtech', 'm.sc',
         'bachelor', 'master', 'phd', 'university', 'college',
         'institute of technology', 'cgpa', 'gpa', 'graduated', 'diploma',
-        'class of', '20', 'batch of',
+        'class of',  'batch of',
     ])
             
 
@@ -149,14 +149,14 @@ def analyze_issues(
             ),
             action_items=[
                 "Add an 'EDUCATION' section (usually at the bottom for experienced candidates, top for freshers)",
-                "Include: Degree name — Institution name (Start Year – End Year)",
+                "Include: Degree name — Institution name (Start Year - End Year)",
                 "Add your CGPA or percentage if it is 7.0+ or 70%+",
-                "Optionally list 3–5 relevant courses (e.g., Data Structures, DBMS, ML)",
+                "Optionally list 3-5 relevant courses (e.g., Data Structures, DBMS, ML)",
             ],
             example_improvement=(
                 "Add:\n"
                 "EDUCATION\n"
-                "B.Tech in Computer Science — IIT Delhi (2021–2025)\n"
+                "B.Tech in Computer Science — IIT Delhi (2021-2025)\n"
                 "CGPA: 8.5 | Relevant Coursework: Data Structures, ML, DBMS"
             ),
         ))
@@ -182,7 +182,7 @@ def analyze_issues(
                 action_items=[
                     "Add a 'TECHNICAL SKILLS' or 'SKILLS' section",
                     "Organize by category: Languages, Frameworks, Tools, Databases, Cloud",
-                    "List at least 10–15 skills relevant to your target role",
+                    "List at least 10-15 skills relevant to your target role",
                     "Use the exact names that appear in job descriptions (e.g., 'React.js' not just 'React')",
                     "Include tools you use daily: Git, VS Code, Postman, Docker, etc.",
                 ],
@@ -202,7 +202,7 @@ def analyze_issues(
     validated   = skill_validation.get('validated_skills', [])
     total_skills = len(unvalidated) + len(validated)
 
-    if total_skills > 0 and len(unvalidated) > len(validated):
+    if len(unvalidated) > len(validated):
         unsupported_list = ', '.join(unvalidated[:8])
         pct_unsupported = round((len(unvalidated) / total_skills) * 100)
         action_items_skills = [
@@ -217,19 +217,19 @@ def analyze_issues(
             ats_impact="High",
             explanation=(
                 f"{pct_unsupported}% of your listed skills ({len(unvalidated)} out of "
-                f"{total_skills}) are not backed by any mention in your projects or "
+                f"{len(unvalidated)}) are not backed by any mention in your projects or "
                 "experience sections. Recruiters and ATS systems cross-reference "
                 "skills against actual work to verify credibility."
             ),
             where_it_appears=f"These skills have no supporting context: {unsupported_list}",
             how_to_fix=(
-                "For each skill in your Skills section, ensure it appears at least "
-                "once in a project description or experience bullet point. "
+                "For each skill in your Skills section, ensure it appears at least"
+                "once in a project description or experience bullet point."
                 "Describe how and where you used that technology."
             ),
             action_items=action_items_skills,
             example_improvement=(
-                f"Your skill '{unvalidated[0]}' has no supporting evidence.\n\n"
+                f"Your skill '{unvalidated[0]}' has no supporting evidence.\n"
                 f"Fix: Add to a project or experience bullet:\n"
                 f"'Built a data pipeline using {unvalidated[0]} that processed "
                 "10K records daily, reducing manual effort by 60%.'"
@@ -272,7 +272,7 @@ def analyze_issues(
             example_improvement=(
                 "Before:\n"
                 "• Responsible for building the backend\n"
-                "• Worked on the payment feature\n\n"
+                "• Worked on the payment feature\n"
                 "After:\n"
                 "• Developed a REST API with FastAPI handling 5K daily requests\n"
                 "• Implemented Stripe payment integration reducing checkout time by 30%"
@@ -303,13 +303,13 @@ def analyze_issues(
                 "Go through each bullet point and ask: 'How much?', 'How many?', 'By what %?'",
                 "Add metrics: users served, requests/day, % improvement, team size, time saved",
                 "Examples: '500+ daily users', 'reduced load time by 40%', 'handled 10K API calls/day'",
-                "If exact numbers aren't known, use reasonable estimates (e.g., '~200 users')",
+                "If exact numbers aren't known, use reasonable estimates (e.g.'~200 users')",
                 "Aim for numbers in at least 50% of your experience bullets",
             ],
             example_improvement=(
                 "Before:\n"
                 "• Improved application performance\n"
-                "• Managed a team of developers\n\n"
+                "• Managed a team of developers\n"
                 "After:\n"
                 "• Improved API response time by 45% through Redis caching\n"
                 "• Led a team of 5 developers delivering 3 features per sprint"
@@ -360,7 +360,7 @@ def analyze_issues(
 
     # low formatting score
 
-    formatting_score = scores.get('formatting_score' , 20)
+    formatting_score = scores.get('formatting_score' , 0)
     if formatting_score < 10:
         detected.append(IssueDetail(
             issue_title="Poor Resume Formatting",
@@ -382,14 +382,14 @@ def analyze_issues(
                 "Use standard section headers: EXPERIENCE, EDUCATION, SKILLS, PROJECTS",
                 "Use bullet points (•) consistently — don't mix with dashes or asterisks",
                 "Remove all tables, text boxes, headers/footers, and images — ATS cannot parse them",
-                "Use a standard font (Calibri, Arial, Times New Roman) at 10–12pt",
+                "Use a standard font (Calibri, Arial, Times New Roman) at 10-12pt",
                 "Order sections: Contact → Summary → Experience → Projects → Education → Skills",
             ],
             example_improvement=(
                 "Use this structure:\n"
                 "NAME & CONTACT\n"
                 "SUMMARY (2-3 lines)\n"
-                "EXPERIENCE (reverse chronological)\n"
+                "EXPERIENCE \n"
                 "PROJECTS (2-3 key projects)\n"
                 "EDUCATION\n"
                 "SKILLS (categorized)"
@@ -415,7 +415,7 @@ def analyze_issues(
             ),
             action_items=[
                 "Add a 'PROFESSIONAL SUMMARY' or 'OBJECTIVE' section at the top of your resume",
-                "Write 2–3 sentences: who you are, your key skills, and what role you seek",
+                "Write 2-3 sentences: who you are, your key skills, and what role you seek",
                 "Mention your years of experience or education level upfront",
                 "Tailor this section for each job application — reference the specific role",
                 "Keep it under 60 words — recruiters spend only 6 seconds on first scan",

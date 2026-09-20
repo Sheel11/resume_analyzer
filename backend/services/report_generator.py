@@ -66,11 +66,11 @@ def generate_html_reports(analysis_data : Dict) -> Dict[str , str] :
     detailed_feedback = [to_dict(fb) for fb in raw_feedback]
 
     high_priority   = [fb for fb in detailed_feedback
-                       if fb.get('severity_level', '').lower() in ('high',)]
+                       if fb.get('serverity_level', '').lower() in ('high',)]
     medium_priority = [fb for fb in detailed_feedback
-                       if fb.get('severity_level', '').lower() in ('moderate', 'medium')]
+                       if fb.get('serverity_level', '').lower() in ('moderate', 'medium')]
     low_priority    = [fb for fb in detailed_feedback
-                       if fb.get('severity_level', '').lower() in ('low', 'info')]
+                       if fb.get('serverity_level', '').lower() in ('low', 'info')]
 
     strengths = analysis_data.get('strengths', [])
 

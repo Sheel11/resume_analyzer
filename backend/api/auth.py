@@ -49,7 +49,7 @@ async def get_current_user(authorization : str = Header(...)):
             detail="Invalid JWT Token"
         )
     
-    return payload
+    return payload['sub']
 
 
 
@@ -60,12 +60,12 @@ async def verify_token(token : str):
     token_kid = unverified_header.get('kid')
 
     cached_kid = [key.get('kid') for key in JWKS_KEY.get('keys' , [])]
-    if token_kid not in [cached_kid]:
+    if token_kid not in cached_kid:
         logger.info('Unknown key ID deteted Refreshing JWKS_CACHED')
         JWKS_KEY = None
         await _get_secret_key()
 
-
+    
     try : 
         payload = jwt.decode(
             token,
@@ -74,7 +74,7 @@ async def verify_token(token : str):
             audience="authenticated"
         )
 
-        return payload['sub']
+        return payload
     
     
     except JWTError:

@@ -60,6 +60,7 @@ function ScoreTrendChart({ data }) {
                                 tick={{ fill: '#64748b', fontSize: 12 }}
                                 dy={10}
                             />
+                            
                             <YAxis
                                 tickLine={false}
                                 axisLine={false}

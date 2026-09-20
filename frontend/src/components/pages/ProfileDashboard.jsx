@@ -36,7 +36,7 @@ function ProfileDashboard() {
 
     useEffect(() => {
         if (token && user?.id) fetchHistory()
-    }, [token, user, fetchHistory])
+    }, [token, user])
 
     const handleDelete = async (id) => {
         try {
@@ -126,6 +126,7 @@ function ProfileDashboard() {
                                 </div>
                             </div>
 
+
                             {/* Loading state */}
                             {loading && (
                                 <div className="flex items-center justify-center gap-3 py-10 text-slate-500">
@@ -133,6 +134,7 @@ function ProfileDashboard() {
                                     <span className="text-sm font-medium">Loading your history...</span>
                                 </div>
                             )}
+                            
 
                             {/* Error state */}
                             {fetchError && !loading && (

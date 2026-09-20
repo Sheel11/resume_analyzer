@@ -3,20 +3,11 @@ from typing import List , Dict , Optional
 from fastapi import APIRouter , HTTPException ,Form, Request , UploadFile ,File , Depends , Header
 from backend.api.auth import get_current_user
 from backend.models.schemas import AnalysisResponse , ComponentScores , JDComparison , SkillValidationDetails
-from backend.utils.file_utils import (
-    get_default_grammar_results,
-    get_default_location_results,
-    get_default_skill_validation_results,
-)
+
 
 logger = logging.getLogger('ats_resume_scorer')
 
 router = APIRouter(prefix='/api/v1' , tags=['Analysis'])
-
-def _clean(text : str) -> str:
-    for prefix in ('✅', '🌟', '❌', '⚠️', '📝', '🔴', '🟡', '🟢', '🟠', '👍'):
-        text = text.lstrip(prefix)
-    return text.strip()
 
 
 @router.post('/analyze-resume' , response_model=AnalysisResponse)
@@ -27,7 +18,6 @@ async def analyze_resume(
     user_id : str = Depends(get_current_user),
     authorization : str = Header(...)
 ):
-    warnings:List[str] = []
 
     nlp = request.app.state.nlp
     embedder = request.app.state.embedder
@@ -225,13 +215,3 @@ async def generate_history_pdf(
     except Exception as e:
         logger.error(f'Failed to generate PDF for history: {e}')
         raise HTTPException(status_code=500, detail=f"Failed to generate PDF: {e}")
-
-
-
-
-
-
-    
-
-
-        

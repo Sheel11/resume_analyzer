@@ -2,10 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { login, signup } from "../api/api";
 import { ToastContainer , toast } from 'react-toastify';
 import { AuthContext } from "./AuthManager";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { X } from 'lucide-react';
-import Emailenter from "./pages/Emailenter";
 
 
 
@@ -122,7 +119,7 @@ function Signin({close ,pass}){
     }
 
     function HandleForgetPass(){
-        pass();
+        // pass();
         close();
     }
 

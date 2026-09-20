@@ -2,13 +2,14 @@ import os
 import json
 import logging
 from typing import Dict
-
+from dotenv import load_dotenv
 from groq import Groq
+
+load_dotenv()
 
 logger = logging.getLogger('ats_resume_scorer')
 
-GROQ_MODEL = 'llama-3.3-70b-versatile'
-
+GROQ_MODEL = os.getenv("GROQ_MODEL")
 _client = None
 
 def _get_client()->Groq:
@@ -79,18 +80,19 @@ Resume Text:
 
 def _call_groq(client : Groq , system_prompt : str , user_prompt : str) ->str :
 
-   response = client.chat.completions.create(
-        model=GROQ_MODEL, 
+    response = client.chat.completions.create(
+        model=GROQ_MODEL,
         messages=[
-            {'role': 'system', 'content': system_prompt},
-            {'role': 'user', 'content': user_prompt}
-        ],
-        temperature=0.0,
-        max_tokens=4096
+                {'role': 'system', 'content': system_prompt},
+                {'role': 'user', 'content': user_prompt}
+            ],
+        reasoning_effort="low",
+        response_format={"type": "json_object"},
     )
 
 
-   return response.choices[0].message.content.strip()
+    return response.choices[0].message.content.strip()
+
 
 def _try_parse_json(text :str) -> Dict | None :
 

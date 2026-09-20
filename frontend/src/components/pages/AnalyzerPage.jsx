@@ -92,7 +92,7 @@ function AnalyzerPage() {
             Analysis <span className="text-blue-600">Workspace</span>
           </h1>
           <p className="text-lg text-slate-600 leading-relaxed max-w-xl mx-auto">
-            Upload your resume, add your target job description, and let our ML model uncover exactly what's blocking you.
+            Upload your resume, add your target job description, and let our model uncover exactly what's blocking you.
           </p>
         </div>
         {!token && 
@@ -126,7 +126,7 @@ function AnalyzerPage() {
 
           {/* Wrapper for the upload section to give it a nice focused entrance */}
           {token && 
-          <div className={`animate-fade-in-up relative z-20 transition-all duration-700 ${results ? 'opacity-50 scale-95 blur-[2px] pointer-events-none hidden md:block' : ''}`} style={{ animationDelay: '100ms' }}>
+          <div className={`relative z-20 transition-all duration-700 ${results ? 'opacity-50 scale-95 blur-[2px] pointer-events-none hidden md:block' : ''}`} style={{ animationDelay: '100ms' }}>
             <Analyze
               onFileSelect={handleFileSelect}
               jobDescription={jobDescription}

@@ -50,7 +50,7 @@ import { UploadCloud, FileText, CheckCircle2, FileUp, ClipboardType } from 'luci
           {isDragActive ? (
             <div className="flex flex-col items-center justify-center space-y-3">
               <UploadCloud className="w-12 h-12 text-blue-500 animate-bounce" />
-              <p className="text-blue-600 font-semibold text-lg">Drop it like it's hot!</p>
+              <p className="text-blue-600 font-semibold text-lg"></p>
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center space-y-4">

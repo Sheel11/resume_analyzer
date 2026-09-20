@@ -62,12 +62,10 @@ def fuzzy_match_keywords(
             score = fuzz.token_sort_ratio(jd_canon , resume_canon)
             best_score = max(best_score , score)
 
-            best_score = max(best_score , score)
-
-            if best_score >= threshold:
-                matched_jd_originals.append(jd_original)
-            else:
-                missing_jd_originals.append(jd_original)
+        if best_score >= threshold:
+            matched_jd_originals.append(jd_original)
+        else:
+            missing_jd_originals.append(jd_original)
 
 
 

@@ -33,7 +33,7 @@ async def save_analysis(user_id : str , filename : str , analysis_result : Dict 
         'user_id':user_id,
         'filename' : filename,
         'ats_score' : serializable_result.get('ats_score' , 0),
-        'keyword_match' : serializable_result.get('missing_keywords', []),
+        'keyword_match' : serializable_result.get('matched_keywords', []),
         'missing_keywords' : serializable_result.get('missing_keywords' , []),
         'created_at' : datetime.now(timezone.utc).isoformat(),
         'analysis_result' : serializable_result,
@@ -49,7 +49,7 @@ async def save_analysis(user_id : str , filename : str , analysis_result : Dict 
             if data and len(data) > 0:
                 inserted_id = str(data[0].get('id'))
                 logger.info(f"Saved analysis for user {user_id} : {inserted_id}")
-                return inserted_id
+                
             return None
     except Exception as exc:
         logger.error(f'Failed to save analysis to Supabase : {exc}')

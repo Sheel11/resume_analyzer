@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { PieChart, Pie, Cell } from 'recharts'
 import {
-  FileDown, Loader2, AlertTriangle, CheckCircle2, AlertCircle,
+  FileDown, Loader2, AlertTriangle, CheckCircle2,
   ChevronDown, ChevronUp, Layout, FileText, PenTool, Award, Info, Search, Zap,
-  ArrowRight, ListChecks
+  ListChecks
 } from 'lucide-react'
 import { downloadCurrentPDF } from '../api/api'
 
@@ -120,8 +120,8 @@ function ResultDashboard({ results, filename = 'resume' }) {
   const jdMatch = results.jd_match_analysis || results.jd_comparison || null;
   const strengths = results.strengths || [];
   const skills = results.skills || [];
-  const matchedKeywords = results.matched_keywords || [];
-  const missingKeywords = results.missing_keywords || [];
+  // const matchedKeywords = results.matched_keywords || [];
+  // const missingKeywords = results.missing_keywords || [];
 
   return (
     <div className="space-y-8 font-sans animate-fade-in pb-10">

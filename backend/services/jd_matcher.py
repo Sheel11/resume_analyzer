@@ -41,27 +41,14 @@ def identify_missing_keywords(resume_keywords : List[str] , jd_keywords : List[s
 
 
 
-def analyze_skills_gap(resume_skills : List[str] , jd_text : str , nlp : spacy.Language) -> List[str]:
-    doc    = nlp(jd_text[:5000])
-    jd_skills = set()
-
-    for ent in doc.ents:
-        if ent.label_ in ['PRODUCT' , 'ORG' , 'LANGUAGE']:
-            jd_skills.add(ent.text.lower())
-
-
-    for chunk in doc.noun_chunks:
-        ct = chunk.text.lower().strip()
-        if 1 <= len(ct.split()) <= 4:
-            jd_skills.add(ct)
-
+def analyze_skills_gap(resume_skills : List[str] , jd_keywords :List[str]) -> List[str]:
 
     # Normalize resume skills for comparison
     resume_normalized = {normalize_skill(s) for s in resume_skills}
 
 
     gap = []
-    for jd_skill in jd_skills:
+    for jd_skill in jd_keywords:
         jd_norm = normalize_skill(jd_skill)
 
         if jd_norm in resume_normalized:
@@ -69,7 +56,7 @@ def analyze_skills_gap(resume_skills : List[str] , jd_text : str , nlp : spacy.L
 
         best_score = max((fuzz.token_sort_ratio(jd_norm , rs) for rs in resume_normalized) , default=0)
 
-        if best_score < 75:
+        if best_score < 80:
             gap.append(jd_skill)
 
     return sorted(gap)[:20]
@@ -103,7 +90,7 @@ def campare_resume_with_jd(
     semantic_similarity = calculate_semantic_similarity(resume_text , jd_text , embedder)
     matched_keywords = identify_matched_keywords(resume_keywords , jd_keywords)
     missing_keywords = identify_missing_keywords(resume_keywords , jd_keywords)
-    skills_gap = analyze_skills_gap(resume_skills , jd_text , nlp)
+    skills_gap = analyze_skills_gap(resume_skills , jd_keywords)
     match_percentage = calculate_match_percentage(
         resume_keywords , jd_keywords , semantic_similarity
     )

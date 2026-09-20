@@ -3,12 +3,14 @@ import sys
 import os
 from typing import Any , Callable , Dict , Optional , Tuple , TypeVar
 
+
 LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)) , 'logs')
 os.makedirs(LOG_DIR , exist_ok=True)
 
 
 logger = logging.getLogger('ats_resume_scorer')
 logger.setLevel(logging.INFO)
+
 
 #simplified file handler - only basic logs
 file_handler = logging.FileHandler(os.path.join(LOG_DIR , 'ats_scorer.log'))
@@ -102,26 +104,4 @@ def get_default_location_results() -> Dict:
         'penalty_applied':    0,
         '_component_status':  'unavailable',
         '_note': 'Location detection unavailable.'
-    }
-
-def get_default_skill_validation_results() -> Dict:
-    return {
-        'validated_skills':     [],
-        'unvalidated_skills':   [],
-        'validation_percentage': 0.0,
-        'skill_project_mapping': {},
-        'validation_score':     0.0,
-        '_component_status':    'unavailable',
-        '_note': 'Skill validation unavailable.'
-    }
-
-def get_default_jd_comparison_results() -> Dict:
-    return {
-        'semantic_similarity': 0.0,
-        'matched_keywords':    [],
-        'missing_keywords':    [],
-        'skills_gap':          [],
-        'match_percentage':    0.0,
-        '_component_status':   'unavailable',
-        '_note': 'JD comparison unavailable.'
     }

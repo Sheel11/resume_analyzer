@@ -39,6 +39,7 @@ def analyze_full_resume(
         'github':    parsed_resume.get('github'),
         'portfolio': None,
     }
+    
     skill_validation = validate_skills_with_project(
         skills=skills,
         projects=projects,
@@ -55,7 +56,7 @@ def analyze_full_resume(
             parsed_jd.get('required_skills', []) +
             parsed_jd.get('preferred_skills', [])
         ))
-        jd_comparison_result = compare_resume_with_jd(
+        jd_comparison_result = campare_resume_with_jd(
             resume_text=resume_text,
             resume_keywords=keywords,
             resume_skills=skills,

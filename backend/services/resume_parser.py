@@ -57,7 +57,7 @@ def validate_file(file_data : bytes , filename : str) ->Tuple[bool , str , Optio
     return True , '' , SUPPORTED_MIME_TYPES[mime_type]
  
 
-def _extract_pdf_hyperlinks(file_data : bytes) -> str:
+def  _extract_pdf_hyperlinks(file_data : bytes) -> str:
     urls = []
     try :
         reader = PyPDF2.PdfReader(io.BytesIO(file_data))

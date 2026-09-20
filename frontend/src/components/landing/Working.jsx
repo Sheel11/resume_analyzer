@@ -10,7 +10,7 @@ const STEPS = [
     {
         id: 2,
         title: 'AI Analysis',
-        description: 'Our proprietary ML model scans your resume against the job description to find missing keywords and formatting issues.',
+        description: 'Our model scans your resume against the job description to find missing keywords and formatting issues.',
         icon: Bot,
     },
     {

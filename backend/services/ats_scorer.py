@@ -214,7 +214,7 @@ def _calc_formatting_score(parsed_resume : Dict , text : str) -> float:
         if re.match(r'^\s*[•\-\*\◦]', line) or re.match(r'^\s*\d+\.', line)
     )
 
-    score += _tier_score(bullet_count , [(15 , 5.0) , (3 , 4.0) , (2 , 3.0) , (1 , 2.0)])
+    score += _tier_score(bullet_count , [(5 , 5.0) , (4 , 4.0) , (3 , 3.0) , (2 , 2.0)])
 
     filled = sum(1 for has_it in [
         bool(exp_entries) , bool(edu_entries) , bool(skills),
@@ -241,7 +241,7 @@ def _calc_keywords_score(
     if jd_keywords : 
         all_resume_terms = list(set(resume_keywords + skills))
         fuzzy_result = fuzzy_match_keywords(all_resume_terms , jd_keywords , threshold=80)
-        match_pct = len(fuzzy_result['matched']) / len(jd_keywords) if jd_keywords else 0
+        match_pct = len(fuzzy_result['matched']) / len(jd_keywords)
         score += _tier_score(match_pct , [(0.7 , 5.0) , (0.5 , 4.0) , (0.3 , 3.0) , (0.2 , 2.0) , (0.1 , 1.0)])
 
     elif len(resume_keywords) >= 10:
@@ -255,7 +255,6 @@ def _calc_keywords_score(
 def _calc_content_score(
         text : str ,
         action_verbs : List[str],
-        grammer_result : Dict,
 ) -> float:
     
     score = 0.0
@@ -273,9 +272,6 @@ def _calc_content_score(
     achievement_count = sum(len(re.findall(p , text , re.IGNORECASE)) for p in number_patterns)
     score += _tier_score(achievement_count, [(10,5.0),(7,4.0),(5,3.0),(3,2.0),(1,1.0)])
     
-    grammer_penalty  = grammer_result.get('penalty_applied' , 0.0)
-    score  += max(0.0 , 10.0 - grammer_penalty / 2.0)
-
     return min(25.0 , max(0.0 , score))
 
 
@@ -341,7 +337,7 @@ def calculate_overall_score(
 
     formatting_score        = _calc_formatting_score(parsed_resume, text)
     keywords_score          = _calc_keywords_score(keywords, skills, jd_keywords)
-    content_score           = _calc_content_score(text, action_verbs, grammar_results)
+    content_score           = _calc_content_score(text, action_verbs)
     skill_validation_score  = _calc_skill_validation_score(skill_validation_results)
     ats_compatibility_score = _calc_ats_compatibility_score(text, location_results, parsed_resume)
 
@@ -360,8 +356,8 @@ def calculate_overall_score(
 
     base_score = (
         skills_keywords_pct   * 0.40 +
-        content_pct           * 0.30 +
-        formatting_pct        * 0.15 +
+        content_pct           * 0.25 +
+        formatting_pct        * 0.20 +
         ats_compatibility_pct * 0.15
     )
 
